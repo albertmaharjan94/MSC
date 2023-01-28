@@ -1,0 +1,5 @@
+"0","plot_ly(df) %>%"
+"0","  add_trace( x=~X1, y=~y,type = ""scatter"",mode = ""markers"", name = ""X1"") %>%  "
+"0","  add_trace( x=~X2, y=~y,type = ""scatter"",mode = ""markers"", name = ""X2"") %>%  "
+"0","  add_trace( x=~X3, y=~y, type = ""scatter"",mode = ""markers"", name = ""X3"") %>%  "
+"0","  add_trace( x=~X4, y=~y,type = ""scatter"",mode = ""markers"", name = ""X4"")  %>% layout(plot_bgcolor='#e5ecf6', title=""Corelation of X inputs with y"", xaxis = list(title=""X inputs""), yaxis = list(title=""Y""))"

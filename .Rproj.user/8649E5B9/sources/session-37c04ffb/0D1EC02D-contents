@@ -141,3 +141,11 @@ fig
 fig = plot_ly(df, x=~X4, y=~y, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X4 input to y output", xaxis = list(title="X4 input"), yaxis = list(title="Output Signal Y"))
 fig
 ```
+
+```{r}
+plot_ly(df) %>%
+  add_trace( x=~X1, y=~y,type = "scatter",mode = "markers", name = "X1") %>%  
+  add_trace( x=~X2, y=~y,type = "scatter",mode = "markers", name = "X2") %>%  
+  add_trace( x=~X3, y=~y, type = "scatter",mode = "markers", name = "X3") %>%  
+  add_trace( x=~X4, y=~y,type = "scatter",mode = "markers", name = "X4")  %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X inputs with y", xaxis = list(title="X inputs"), yaxis = list(title="Y"))
+```
