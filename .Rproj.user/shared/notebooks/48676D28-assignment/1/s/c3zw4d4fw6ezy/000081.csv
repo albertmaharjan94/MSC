@@ -1,0 +1,6 @@
+"0","p <- ggplot(X_df, aes(x = values)) +"
+"0","  geom_histogram(aes(x=values, y = ..density.., fill=Inputs), bins = 10, alpha=0.5)+"
+"0","  stat_density(aes(x=values, y = ..density.., color=Inputs),geom=""line"") +"
+"0","  geom_rug()"
+"0","fig <- ggplotly(p) %>% layout(plot_bgcolor='#e5ecf6', title=""Distribution of X inputs"", xaxis= list(title=""X Signal""), yaxis = list(title=""Density""))"
+"0","fig"

@@ -1,0 +1,512 @@
+fig = plotly:: subplot(fig1, fig2,
+) %>% layout(
+xaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2,shareX = TRUE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2,shareY = TRUE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2,shareY = FALSE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2, nrows = 1)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2, nrows = 2)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig = plotly:: subplot(fig1, fig2, nrows = 2, shareX = TRUE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 2, shareX = TRUE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)  %>% layout(
+xaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+plot_bgcolor='#e5ecf6')
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)  %>% layout(
+xaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+plot_bgcolor='#e5ecf6')
+annotations = list(
+list(
+font = list(size = 10),
+text = "X1",
+xref = "paper",
+yref = "paper",
+xanchor = "center",
+yanchor = "bottom",
+showarrow = FALSE
+),
+list(
+font = list(size = 10),
+text = "X2",
+xref = "paper",
+yref = "paper",
+xanchor = "center",
+yanchor = "bottom",
+showarrow = FALSE
+),
+list(
+font = list(size = 10),
+text = "X3",
+xref = "paper",
+yref = "paper",
+xanchor = "center",
+yanchor = "bottom",
+showarrow = FALSE
+),
+list(
+font = list(size = 10),
+text = "X4",
+xref = "paper",
+yref = "paper",
+xanchor = "center",
+yanchor = "bottom",
+showarrow = FALSE
+),
+)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)  %>% layout(
+xaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+plot_bgcolor='#e5ecf6')
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)  %>% layout(
+xaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,),
+yaxis = list(zerolinecolor = '#ffff',
+zerolinewidth = 2,
+),
+plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE)  %>% layout(plot_bgcolor='#e5ecf6')
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX = "X")  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+y_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6',data = df)
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, shareY =  )  %>% layout(plot_bgcolor='#e5ecf6')
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6', title = 'custom tick labels with ticklabelmode="period"')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% plotly::layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6')
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+y_fig
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6')
+y_fig
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="test")
+y_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4)
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE, titleX =TRUE, titleY = TRUE, )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = T )  %>% layout(plot_bgcolor='#e5ecf6',)
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = T )  %>% layout(plot_bgcolor='#e5ecf6')
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = T )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time")
+x_fig
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time")
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", yaxis ="X" )
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", yaxis ="X")
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", yaxisyaxis = list(title = "X"))
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", yaxis = list(title = "X"))
+plot_ly(df) %>%
+add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%
+add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%
+add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%
+add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4") %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", yaxis = list(title = "X"), xaxis=list(title = "Time"))
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = T )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", xaxis=list(title = "Time"))
+x_fig
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = T , titleY = T)  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of X with time", xaxis=list(title = "Time"))
+x_fig
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of Y with time")
+y_fig
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of Y with time", xaxis = list(title="y"), yaxis = list(title="Time"))
+y_fig
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analyais of Y with time", xaxis = list(title="Time"), yaxis = list(title="y"))
+y_fig
+describe(df["time"])...names()
+describe(df["time"]).names()
+describe(df["time"])
+describe(df["time"]).data
+describe(df["time"])
+fig <- plot_ly(df, x = ~X1, type = "histogram")
+fig
+fig = plot_ly(df, x = ~X1, type = "histogram") %>%
+add_trace( x=~X1, type = "histogram",mode = "lines", name = "X2")
+fig
+fig = plot_ly(df,  x=~X1, type = "scatter",mode = "lines", name = "X2")
+fig
+fig = plot_ly(df,  y=~X1, type = "scatter",mode = "lines", name = "X2")
+fig
+fig = plot_ly(df,  y=~X1, type = "histogram",mode = "lines", name = "X2")
+fig
+fig = plot_ly(df,  x=~X1, type = "histogram",mode = "lines", name = "X2")
+fig
+dens = density(df["X1"])
+dens = density(df["X1"].colSums())
+density(sum(df$X1))
+density(df$X1)
+dens = density(log(df$poptotal))
+dens = density(df["X1"])
+dens = density(df["X1"])
+dens = density(df["X1"])
+dens = density(df["X1"])
+dens = density(sum(df["X1"]))
+dens = density(sum(df["X1"]))
+dens = density(df["X1"])
+dens = density(df["X1"])
+plot_ly(
+data = df,
+y=~X1,
+type = "histogram",
+name = "Histogram")
+plot_ly(
+data = df,
+x=~X1,
+type = "histogram",
+name = "Histogram")
+p <- ggplot(df, aes(x=X1,) +
+geom_histogram(binwidth=2.5) +
+ylab("sum of tip") +
+geom_rug(sides="t", length = unit(0.3, "cm"))
+fig <- ggplotly(p)
+p <- ggplot(df, aes(x=X1,)) +
+geom_histogram(binwidth=2.5) +
+ylab("sum of tip") +
+geom_rug(sides="t", length = unit(0.3, "cm"))
+fig <- ggplotly(p)
+fig
+gg <- ggplot(data = df ) +
+geom_histogram(aes(y = ..density.. ),bins = 29, alpha = 0.7) +
+geom_density(aes(x=x)) + geom_rug(aes(x=x))+
+ylab("") +
+xlab("")
+ggplotly(gg)%>%
+layout(plot_bgcolor='#e5ecf6',
+xaxis = list(
+title='Time',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(
+title='Value A',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'))
+gg <- ggplot(data = df ) +
+geom_histogram(aes(x=X1,y = ..density.. ),bins = 29, alpha = 0.7) +
+geom_density(aes(x=x)) + geom_rug(aes(x=x))+
+ylab("") +
+xlab("")
+ggplotly(gg)%>%
+layout(plot_bgcolor='#e5ecf6',
+xaxis = list(
+title='Time',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(
+title='Value A',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'))
+colnames(df) <- c('x', 'Group')
+colnames(df) <- c('x', 'Group')
+df
+library(ggplot2)
+library(plotly)
+set.seed(1)
+x1 <- rnorm(200, mean = 0, sd = 1) - 2
+x2 <- rnorm(200, mean = 0, sd = 1)
+x3 <- rnorm(200, mean = 0, sd = 1) + 2
+x4 <- rnorm(200, mean = 0, sd = 1) +4
+group_labels = c('Group 1', 'Group 2', 'Group 3', 'Group 4')
+df1 <- data.frame(x1, group_labels[1])
+colnames(df1) <- c('x', 'Group')
+df2 <- data.frame(x2, group_labels[2])
+colnames(df2) <- c('x', 'Group')
+df3 <- data.frame(x3, group_labels[3])
+colnames(df3) <- c('x', 'Group')
+df4 <- data.frame(x4, group_labels[4])
+colnames(df4) <- c('x', 'Group')
+df <- rbind(df1,df2,df3,df4)
+colnames(df) <- c('x', 'Group')
+gg <- ggplot(data = df ) +
+geom_histogram(aes(x=x, y = ..density.., fill=Group),bins = 29, alpha = 0.7) +
+geom_density(aes(x=x, color=Group)) + geom_rug(aes(x=x, color=Group))+
+ylab("") +
+xlab("")
+ggplotly(gg)%>%
+layout(plot_bgcolor='#e5ecf6',
+xaxis = list(
+title='Time',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'),
+yaxis = list(
+title='Value A',
+zerolinecolor = '#ffff',
+zerolinewidth = 2,
+gridcolor = 'ffff'))
+install.packages("ggplot2")
+install.packages("matlib")
+install.packages("rsample")
+install.packages("plotly")
+install.packages("Hmisc")
+install.packages("rsample")

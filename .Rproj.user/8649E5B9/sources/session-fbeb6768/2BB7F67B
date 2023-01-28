@@ -1,0 +1,33 @@
+{
+    "id": "2BB7F67B",
+    "path": "C:/Users/alber/Desktop/Msc/assignment.Rmd",
+    "project_path": "assignment.Rmd",
+    "type": "r_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1674912023569.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "74,5",
+        "scrollLine": "0",
+        "rmdVisualMode": "true",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "1983:3080",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1674918719,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1674921438532,
+    "read_only": false,
+    "read_only_alternatives": []
+}

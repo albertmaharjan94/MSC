@@ -1,0 +1,143 @@
+```{r}
+#install.packages("ggplot2")
+#install.packages("matlib")
+#install.packages("rsample")
+#install.packages("plotly")
+#install.packages("Hmisc")
+#install.packages("tidyr")
+```
+
+```{r}
+library(matlib)
+library(ggplot2)
+library(rsample)
+library(plotly)
+library(Hmisc)
+library(tidyr)
+```
+
+```{r}
+time_file = read.csv("./time_1673241270748.csv", header = F)
+X_file = read.csv("./X_1673241366257.csv", header = F)
+y_file = read.csv("./y_1673241374123.csv", header = F)
+
+```
+
+```{r}
+time = as.matrix(time_file)
+colnames(time)<-c("time")
+time[1:5,]
+```
+
+```{r}
+X = as.matrix(X_file)
+colnames(X)<-c("X1", "X2", "X3", "X4")
+X[1:5,]
+```
+
+```{r}
+y = as.matrix(y_file)
+colnames(y)<-c("y")
+y[1:5,]
+```
+
+```{r}
+df = data.frame(cbind(time, X, y ))
+df[1:5,]
+```
+
+```{r}
+describe(df["time"])
+```
+
+```{r}
+plot_ly(df) %>%
+  add_trace( x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1") %>%  
+  add_trace( x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2") %>%  
+  add_trace( x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3") %>%  
+  add_trace( x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")  %>% layout(plot_bgcolor='#e5ecf6', title="Time series comparison of X with time", xaxis = list(title="Time"), yaxis = list(title="Input Signals"))
+
+```
+
+```{r}
+fig1 = plot_ly(df, x=~time, y=~X1,type = "scatter",mode = "lines", name = "X1")
+fig2 = plot_ly(df, x=~time, y=~X2,type = "scatter",mode = "lines", name = "X2")
+fig3 = plot_ly(df, x=~time, y=~X3,type = "scatter",mode = "lines", name = "X3")
+fig4 = plot_ly(df, x=~time, y=~X4,type = "scatter",mode = "lines", name = "X4")
+x_fig = plotly:: subplot(fig1, fig2, fig3, fig4, nrows = 4, shareX = TRUE,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analysis of X with time", xaxis = list(title="Time"))
+x_fig
+```
+
+```{r}
+
+fig1 = plot_ly(df, x=~time, y=~y,type = "scatter",mode = "lines", name = "y")
+
+y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title="Time series analysis of Y with time", xaxis = list(title="Time"), yaxis = list(title="Output Signal Y"))
+y_fig
+```
+
+```{r}
+gg_X1 = ggplot(df, aes(x = X1)) +    # Draw histogram & density
+  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  stat_density(geom="line") +
+  geom_rug()
+ggplotly(gg_X1)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X1", xaxis= list(title="X1 Signal"), yaxis = list(title="Density"))
+
+```
+
+```{r}
+gg_X2 = ggplot(df, aes(x = X2)) +    # Draw histogram & density
+  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  stat_density(geom="line") +
+  geom_rug()
+ggplotly(gg_X2)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X2", xaxis= list(title="X2 Signal"), yaxis = list(title="Density"))
+
+```
+
+```{r}
+gg_X3 = ggplot(df, aes(x = X3)) +    # Draw histogram & density
+  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  stat_density(geom="line") +
+  geom_rug()
+ggplotly(gg_X3)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X3", xaxis= list(title="X3 Signal"), yaxis = list(title="Density"))
+
+```
+
+```{r}
+gg_X4 = ggplot(df, aes(x = X4)) +    # Draw histogram & density
+  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  stat_density(geom="line") +
+  geom_rug()
+ggplotly(gg_X4)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X4", xaxis= list(title="X4 Signal"), yaxis = list(title="Density"))
+
+```
+
+```{r}
+p <- ggplot(X_df, aes(x = values)) +
+  geom_histogram(aes(x=values, y = ..density.., fill=Inputs), bins = 10, alpha=0.5)+
+  stat_density(aes(x=values, y = ..density.., color=Inputs),geom="line") +
+  geom_rug()
+fig <- ggplotly(p) %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X inputs", xaxis= list(title="X Signal"), yaxis = list(title="Density"))
+fig
+```
+
+```{r}
+# Corelation
+fig = plot_ly(df, x=~X1, y=~y, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X1 input to y output", xaxis = list(title="X1 input"), yaxis = list(title="Output Signal Y"))
+fig
+```
+
+```{r}
+fig = plot_ly(df, x=~X2, y=~y, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X2 input to y output", xaxis = list(title="X2 input"), yaxis = list(title="Output Signal Y"))
+fig
+```
+
+```{r}
+fig = plot_ly(df, x=~X3, y=~y, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X3 input to y output", xaxis = list(title="X3 input"), yaxis = list(title="Output Signal Y"))
+fig
+```
+
+```{r}
+fig = plot_ly(df, x=~X4, y=~y, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X4 input to y output", xaxis = list(title="X4 input"), yaxis = list(title="Output Signal Y"))
+fig
+```
