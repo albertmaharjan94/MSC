@@ -1,0 +1,5 @@
+"0","m1 = cbind(y_Hat_Model1, df$y)"
+"0","colnames(m1)<-c(""Y_HAT"", ""Y"")"
+"0","m1 = data.frame(m1)"
+"0","fig = plot_ly(m1, x=~Y_HAT, y=~Y, type=""scatter"", mode=""markers"")"
+"0","fig"
