@@ -165,8 +165,12 @@ y  = df$y + rnorm(length(df$y), mean=0, sd = 0.1^2)
 ```
 
 ```{r}
-Model1 = cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, y)
-Model1_theta_hat = solve(t(Model1) %*% Model1) %*% t(Model1) %*% df$y
+ones = matrix(1 , length(df$y),1)
+```
+
+```{r}
+Model1 = cbind(ones, df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4)
+Model1_theta_hat = solve(t(Model1) %*% Model1) %*% t(Model1) %*% y
 print("Model1 Theta hat")
 print(Model1_theta_hat[,1])
 print("Model1 Y hat")
@@ -175,8 +179,8 @@ print(y_Hat_Model1[1:5,])
 ```
 
 ```{r}
-Model2 = cbind(df$X4, df$X1^3, df$X3^4)
-Model2_theta_hat = solve(t(Model2) %*% Model2) %*% t(Model2) %*% df$y
+Model2 = cbind(ones, df$X4, df$X1^3, df$X3^4)
+Model2_theta_hat = solve(t(Model2) %*% Model2) %*% t(Model2) %*% y
 print("Model2 Theta hat")
 print(Model2_theta_hat[,1])
 y_Hat_Model2 = Model2 %*% Model2_theta_hat
@@ -185,8 +189,8 @@ print(y_Hat_Model2[1:5,])
 ```
 
 ```{r}
-Model3 = cbind(df$X3^3, df$X3^4)
-Model3_theta_hat = solve(t(Model3) %*% Model3) %*% t(Model3) %*% df$y
+Model3 = cbind(ones, df$X3^3, df$X3^4)
+Model3_theta_hat = solve(t(Model3) %*% Model3) %*% t(Model3) %*% y
 print("Model3 Theta hat")
 print(Model3_theta_hat[,1])
 y_Hat_Model3 = Model3 %*% Model3_theta_hat
@@ -195,8 +199,8 @@ print(y_Hat_Model3[1:5,])
 ```
 
 ```{r}
-Model4 = cbind(df$X2, df$X1^3, df$X3^4)
-Model4_theta_hat = solve(t(Model4) %*% Model4) %*% t(Model4) %*% df$y
+Model4 = cbind(ones, df$X2, df$X1^3, df$X3^4)
+Model4_theta_hat = solve(t(Model4) %*% Model4) %*% t(Model4) %*% y
 print("Model4 Theta hat")
 print(Model4_theta_hat[,1])
 y_Hat_Model4 = Model4 %*% Model4_theta_hat
@@ -205,8 +209,8 @@ print(y_Hat_Model4[1:5,])
 ```
 
 ```{r}
-Model5 = cbind(df$X4, df$X1^2, df$X1^3, df$X3^4)
-Model5_theta_hat = solve(t(Model5) %*% Model5) %*% t(Model5) %*% df$y
+Model5 = cbind(ones, df$X4, df$X1^2, df$X1^3, df$X3^4)
+Model5_theta_hat = solve(t(Model5) %*% Model5) %*% t(Model5) %*% y
 print("Model5 Theta hat")
 print(Model5_theta_hat[,1])
 y_Hat_Model5 = Model5 %*% Model5_theta_hat
@@ -215,21 +219,29 @@ print(y_Hat_Model5[1:5,])
 ```
 
 ```{r}
-RSS_Model1 = sum((df$y-y_Hat_Model1)^2)
+RSS_Model1 = sum((y-y_Hat_Model1)^2)
 print(RSS_Model1)
 
-
-RSS_Model2 = sum((df$y-y_Hat_Model2)^2)
+RSS_Model2 = sum((y-y_Hat_Model2)^2)
 print(RSS_Model2)
 
 
-RSS_Model3 = sum((df$y-y_Hat_Model3)^2)
+RSS_Model3 = sum((y-y_Hat_Model3)^2)
 print(RSS_Model3)
 
 
-RSS_Model4 = sum((df$y-y_Hat_Model4)^2)
+RSS_Model4 = sum((y-y_Hat_Model4)^2)
 print(RSS_Model4)
 
-RSS_Model5 = sum((df$y-y_Hat_Model5)^2)
+RSS_Model5 = sum((y-y_Hat_Model5)^2)
 print(RSS_Model5)
+```
+
+```{r}
+N=length(y)
+V_Model1=RSS_Model1/(N-1)
+print(V_Model1)
+
+lh_Model1=-(N/2)*(log(2*pi))-(N/2)*(log(V_Model1))-(1/(2*V_Model1))*RSS_Model1
+lh_Model1
 ```

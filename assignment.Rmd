@@ -17,9 +17,9 @@ library(tidyr)
 ```
 
 ```{r}
-time_file = read.csv("./time_1673241270748.csv", header = F)
-X_file = read.csv("./X_1673241366257.csv", header = F)
-y_file = read.csv("./y_1673241374123.csv", header = F)
+time_file = read.csv("./time_1673241270748.csv", header = F, skip = 1)
+X_file = read.csv("./X_1673241366257.csv", header = F, skip = 1)
+y_file = read.csv("./y_1673241374123.csv", header = F, skip = 1)
 
 ```
 
@@ -152,20 +152,15 @@ plot_ly(df) %>%
 ```
 
 ```{r}
-m1 = cbind(y_Hat_Model1, df$y)
-colnames(m1)<-c("Y_HAT", "Y")
-m1 = data.frame(m1)
-fig = plot_ly(m1, x=~Y_HAT, y=~Y, type="scatter", mode="markers")
-fig
-
+ones = matrix(1, length(df$X1),1)
 ```
 
 ```{r}
-y  = df$y + rnorm(length(df$y), mean=0, sd = 0.1^2)
+noise  = rnorm(length(df$y), mean=0, sd = 0.1)
 ```
 
 ```{r}
-Model1 = cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, y)
+Model1 = cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, ones, noise)
 Model1_theta_hat = solve(t(Model1) %*% Model1) %*% t(Model1) %*% df$y
 print("Model1 Theta hat")
 print(Model1_theta_hat[,1])
@@ -175,7 +170,7 @@ print(y_Hat_Model1[1:5,])
 ```
 
 ```{r}
-Model2 = cbind(df$X4, df$X1^3, df$X3^4)
+Model2 = cbind(df$X4, df$X1^3, df$X3^4, ones, noise)
 Model2_theta_hat = solve(t(Model2) %*% Model2) %*% t(Model2) %*% df$y
 print("Model2 Theta hat")
 print(Model2_theta_hat[,1])
@@ -185,7 +180,7 @@ print(y_Hat_Model2[1:5,])
 ```
 
 ```{r}
-Model3 = cbind(df$X3^3, df$X3^4)
+Model3 = cbind(df$X3^3, df$X3^4, ones, noise)
 Model3_theta_hat = solve(t(Model3) %*% Model3) %*% t(Model3) %*% df$y
 print("Model3 Theta hat")
 print(Model3_theta_hat[,1])
@@ -195,7 +190,7 @@ print(y_Hat_Model3[1:5,])
 ```
 
 ```{r}
-Model4 = cbind(df$X2, df$X1^3, df$X3^4)
+Model4 = cbind(df$X2, df$X1^3, df$X3^4, ones, noise)
 Model4_theta_hat = solve(t(Model4) %*% Model4) %*% t(Model4) %*% df$y
 print("Model4 Theta hat")
 print(Model4_theta_hat[,1])
@@ -205,7 +200,7 @@ print(y_Hat_Model4[1:5,])
 ```
 
 ```{r}
-Model5 = cbind(df$X4, df$X1^2, df$X1^3, df$X3^4)
+Model5 = cbind(df$X4, df$X1^2, df$X1^3, df$X3^4, ones, noise)
 Model5_theta_hat = solve(t(Model5) %*% Model5) %*% t(Model5) %*% df$y
 print("Model5 Theta hat")
 print(Model5_theta_hat[,1])

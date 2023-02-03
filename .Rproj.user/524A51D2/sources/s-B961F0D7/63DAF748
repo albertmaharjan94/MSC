@@ -3,9 +3,9 @@
     "path": "/home/digitech/Workspace/msc/MSC/assignment.Rmd",
     "project_path": "assignment.Rmd",
     "type": "r_markdown",
-    "hash": "195959782",
+    "hash": "0",
     "contents": "",
-    "dirty": false,
+    "dirty": true,
     "created": 1674958844803.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -14,10 +14,10 @@
         "Source": "Source",
         "rmdVisualMode": "true",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "5391:18636",
+        "rmdVisualModeLocation": "7074:20503",
         "rmdVisualWrapConfigured": "true",
         "docOutlineVisible": "1",
-        "cursorPosition": "167,59",
+        "cursorPosition": "244,27",
         "scrollLine": "0"
     },
     "folds": "",
@@ -25,7 +25,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1674987621171,
+    "last_content_update": 1675052847069,
     "read_only": false,
     "read_only_alternatives": []
 }
