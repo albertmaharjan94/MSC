@@ -1,3 +1,9 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
 ```{r}
 #install.packages("ggplot2")
 #install.packages("matlib")
@@ -113,11 +119,22 @@ ggplotly(gg_X4)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X4", 
 ```
 
 ```{r}
+X_df = data.frame(rbind(data.frame(values = df$X1, Inputs = "X1"),
+data.frame(values =df$X2, Inputs = "X2"),
+data.frame(values= df$X3, Inputs = "X3"),
+data.frame(values= df$X4, Inputs = "X4")))
+```
+
+```{r}
 p <- ggplot(X_df, aes(x = values)) +
   geom_histogram(aes(x=values, y = after_stat(density), fill=Inputs), bins = 10, alpha=0.5)+
   stat_density(aes(x=values, y = after_stat(density), color=Inputs),geom="line") +
   geom_rug()
 fig <- ggplotly(p) %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X inputs", xaxis= list(title="X Signal"), yaxis = list(title="Density"))
+p
+```
+
+```{r}
 fig
 ```
 
@@ -152,21 +169,55 @@ plot_ly(df) %>%
 ```
 
 ```{r}
-ones = matrix(1, length(df$X1),1)
-```
-
-```{r}
-noise  = rnorm(length(df$y), mean=0, sd = 0.1)
-```
-
-```{r}
 thetaHat <- function(model, y){
   return (solve(t(model) %*% model) %*% t(model) %*% y)
 }
 ```
 
 ```{r}
-Model1 = cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, ones, noise)
+generateModel1 <- function(df){
+  set.seed(100)
+  ones = matrix(1, length(df$X1),1)
+  noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+  theta_bias = runif(1, -1, 1) * ones
+  return (cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, theta_bias, noise))
+}
+
+generateModel2 <- function(df){
+  set.seed(100)
+  ones = matrix(1, length(df$X1),1)
+  noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+  theta_bias = runif(1, -1, 1) * ones
+  return (cbind(df$X4, df$X1^3, df$X3^4, theta_bias, noise))
+}
+
+generateModel3 <- function(df){
+  set.seed(100)
+  ones = matrix(1, length(df$X1),1)
+  noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+  theta_bias = runif(1, -1, 1) * ones
+  return (cbind(df$X3^3, df$X3^4, theta_bias, noise))
+}
+
+generateModel4 <- function(df){
+  set.seed(100)
+  ones = matrix(1, length(df$X1),1)
+  noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+  theta_bias = runif(1, -1, 1) * ones
+  return (cbind(df$X2, df$X1^3, df$X3^4, theta_bias, noise))
+}
+
+generateModel5 <- function(df){
+  set.seed(100)
+  ones = matrix(1, length(df$X1),1)
+  noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+  theta_bias = runif(1, -1, 1) * ones
+  return (cbind(df$X4, df$X1^2, df$X1^3, df$X3^4, theta_bias, noise))
+}
+```
+
+```{r}
+Model1 = generateModel1(df)
 Model1_theta_hat =thetaHat(Model1, df$y)
 print("Model1 Theta hat")
 print(Model1_theta_hat[,1])
@@ -176,7 +227,7 @@ print(y_Hat_Model1[1:5,])
 ```
 
 ```{r}
-Model2 = cbind(df$X4, df$X1^3, df$X3^4, ones, noise)
+Model2 = generateModel2(df)
 Model2_theta_hat = thetaHat(Model2, df$y)
 print("Model2 Theta hat")
 print(Model2_theta_hat[,1])
@@ -186,7 +237,7 @@ print(y_Hat_Model2[1:5,])
 ```
 
 ```{r}
-Model3 = cbind(df$X3^3, df$X3^4, ones, noise)
+Model3 = generateModel3(df)
 Model3_theta_hat = thetaHat(Model3, df$y)
 print("Model3 Theta hat")
 print(Model3_theta_hat[,1])
@@ -196,7 +247,7 @@ print(y_Hat_Model3[1:5,])
 ```
 
 ```{r}
-Model4 = cbind(df$X2, df$X1^3, df$X3^4, ones, noise)
+Model4 = generateModel4(df)
 Model4_theta_hat = thetaHat(Model4, df$y)
 print("Model4 Theta hat")
 print(Model4_theta_hat[,1])
@@ -206,7 +257,7 @@ print(y_Hat_Model4[1:5,])
 ```
 
 ```{r}
-Model5 = cbind(df$X4, df$X1^2, df$X1^3, df$X3^4, ones, noise)
+Model5 = generateModel5(df)
 Model5_theta_hat = thetaHat(Model5, df$y)
 print("Model5 Theta hat")
 print(Model5_theta_hat[,1])
@@ -237,15 +288,19 @@ c(RSS_Model1, RSS_Model2, RSS_Model3, RSS_Model4, RSS_Model5)
 ```
 
 ```{r}
-calculateVariance <- function(N, rss_model){
-  return  (rss_model/(N-1))
-}
+
 ```
 
 ```{r}
+calculateVariance <- function(N, rss_model){
+  return  (rss_model/(N-1))
+}
 calculateLikelihood <- function(N, variance_model, rss_model) {
   return (-(N/2)*(log(2*pi))-(N/2)*(log(variance_model))-(1/(2*variance_model))*rss_model)
 }
+N = length(df$y)
+Variance_Model1 = calculateVariance(N, RSS_Model1)
+Likelihood_1  = calculateLikelihood(N, Variance_Model1, RSS_Model1)
 ```
 
 ```{r}
@@ -280,11 +335,14 @@ calculateAIC <- function(N, model_thetahat, likelihood_model){
   k_model = length(model_thetahat)
   return (2*k_model-2*likelihood_model)
 }
+
+```
+
+```{r}
 calculateBIC <- function(N, model_thetahat, likelihood_model){
   k_model = length(model_thetahat)
   return (k_model* log(N) - 2*likelihood_model)
 }
-
 ```
 
 ```{r}
@@ -315,6 +373,38 @@ c(AIC_Model4, BIC_Model4)
 AIC_Model5 = calculateAIC(N, Model5_theta_hat, Likelihood_5)
 BIC_Model5 = calculateBIC(N, Model5_theta_hat, Likelihood_5)
 c(AIC_Model5, BIC_Model5)
+```
+
+```{r}
+list_models = c("Model 1", "Model 2", "Model 3", "Model 4", "Model 5")
+list_aic = c(AIC_Model1, AIC_Model2, AIC_Model3, AIC_Model4, AIC_Model5)
+list_bic = c(BIC_Model1, BIC_Model2, BIC_Model3, BIC_Model4, BIC_Model5)
+list_rss = c(RSS_Model1, RSS_Model2, RSS_Model3, RSS_Model4, RSS_Model5)
+list_likelihood = c(Likelihood_1, Likelihood_2, Likelihood_3, Likelihood_4, Likelihood_5)
+list_variance = c(Variance_Model1, Variance_Model2, Variance_Model3, Variance_Model4, Variance_Model5)
+```
+
+```{r}
+data.frame(Models = list_models, RSS = list_rss, AIC = list_aic, BIC = list_bic,  Likelihood = list_likelihood)
+
+```
+
+```{r}
+data.frame(Models = list_models, AIC = list_aic)
+```
+
+```{r}
+data.frame(Models = list_models, BIC = list_bic)
+
+```
+
+```{r}
+data.frame(Models = list_models, RSS = list_rss)
+
+```
+
+```{r}
+data.frame(Models = list_models, Variance = list_variance, Likelihood = list_likelihood)
 ```
 
 ```{r}
@@ -362,44 +452,51 @@ plotQQ(Model5_Error, "QQ plot of model 5")
 ```
 
 ```{r}
-Split_Data = initial_split(df, prop = .7)
+set.seed(100)
+Split_Data = initial_split(df, prop = .8)
 training_set = training(Split_Data)
 testing_set = testing(Split_Data)
 ```
 
 ```{r}
-training_ones=matrix(1 , length(training_set$X1),1)
-noise = rnorm(length(training_set$y), mean=0, sd = 0.1)
-testing_ones=matrix(1 , length(testing_set$X1),1)
-testing_noise = rnorm(length(testing_set$y), mean=0, sd = 0.1)
-
-X_traning_model = cbind(training_set$X4,training_set$X1^3,training_set$X3^4, training_ones, noise)
-X_testing_model = cbind(testing_set$X4,testing_set$X1^3,testing_set$X3^4, testing_ones, testing_noise)
-
+X_traning_model = generateModel5(training_set)
+X_testing_model = generateModel5(testing_set)
 training_thetaHat = thetaHat(X_traning_model, training_set$y)
 ```
 
 ```{r}
 Y_testing_hat = X_testing_model %*% training_thetaHat
-RSS_testing=sum((testing_set$y-Y_testing_hat)^2)
-RSS_testing
+Y_training_hat = X_traning_model %*% training_thetaHat
 ```
 
 ```{r}
-t.test(training_set$y, mu = 500, alternative = "two.sided", conf.level=0.95)
+result = t.test(Y_training_hat, Y_testing_hat, mu = 500, alternative = "two.sided", conf.level=0.95)
+result
 ```
 
 ```{r}
-C_I1 = -0.1631672 
-C_I2 = 0.4873683
+C_I1 = result$conf.int[1]
+C_I2 = result$conf.int[2]
+S_ERROR = result$stderr
+S_ERROR
 ```
 
 ```{r}
 traingin_plot = ggplot(training_set, aes(x = y)) +    # Draw histogram & density
   stat_density(geom="line", color = "#195f90") + 
   geom_vline(xintercept = C_I1, linetype="dashed", color="red")+ 
-  geom_vline(xintercept = C_I2, linetype="dashed", color="red")
+  geom_vline(xintercept = C_I2, linetype="dashed", color="red")+
+  geom_vline(xintercept = S_ERROR, linetype="dashed", color="black")
 ggplotly(traingin_plot)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of training data", xaxis= list(title="y"), yaxis = list(title="Density"))
+```
+
+```{r}
+testing_plot = ggplot(testing_set, aes(x = y)) +    # Draw histogram & density
+  stat_density(geom="line", color = "#195f90") + 
+  geom_vline(xintercept = C_I1, linetype="dashed", color="red")+ 
+  geom_vline(xintercept = C_I2, linetype="dashed", color="red")+
+  geom_vline(xintercept = S_ERROR, linetype="dashed", color="black")
+ggplotly(testing_plot)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of testing data", xaxis= list(title="y"), yaxis = list(title="Density"))
 ```
 
 ```{r}
@@ -444,30 +541,29 @@ arr_1=0
 arr_2=0
 f_value=0
 s_value=0
-Model2_theta_hat
-#values from thetahat
+
 thetebias <- Model2_theta_hat[4,] #choosen parameter
 thetaone <- Model2_theta_hat[1,] # chosen prarameter
-thetatwo <- Model2_theta_hat[2,] # constant value
-thetathree <- -Model2_theta_hat[3,] # constant value
+thetatwo <- Model2_theta_hat[2,]
+thetathree <- -Model2_theta_hat[3,]
 thetanoise <- Model2_theta_hat[5,]
-Epison <- RSS_Model2 * 2 ## fixing value of eplision
-num <- 100 #number of iteration
+
+epsilon <- RSS_Model2 * 2
+num <- 100
 ```
 
 ```{r}
 counter <- 0
 for (i in 1:num) {
-  range1 <- runif(1,-thetebias,thetebias) # calculating the range
-  range1
-  range2 <- runif(1,-thetaone,thetaone)
-  New_thetahat <- matrix(c(range1,range2,thetatwo,thetafour, thetanoise))
-  New_Y_Hat <- Model2 %*% New_thetahat ## New Y hat
-  new_RSS <- sum((df$y-New_Y_Hat)^2)
-  new_RSS
-  if (new_RSS > Epison){
-    arr_1[i] <- range1
-    arr_2[i] <- range2
+  p1 <- runif(1,-abs(thetebias),abs(thetebias))
+  p2 <- runif(1,-abs(thetaone), abs(thetaone))
+  abc_thetahat <- matrix(c(p1,p2,thetatwo,thetathree, thetanoise))
+  abc_Y_Hat <- Model2 %*% abc_thetahat ## New Y hat
+  abc_RSS <- sum((df$y-abc_Y_Hat)^2)
+  
+  if (abc_RSS > epsilon){
+    arr_1[i] <- p1
+    arr_2[i] <- p2
     counter = counter+1
     f_value <- matrix(arr_1)
     s_value <- matrix(arr_2)
@@ -476,17 +572,13 @@ for (i in 1:num) {
 ```
 
 ```{r}
-hist(f_value)
+abc_results = data.frame(f_value ,s_value)
 ```
 
 ```{r}
-hist(s_value)
+abc_results
 ```
 
 ```{r}
-plot(f_value,s_value, col = c("red", "blue"), main = "Joint and Marginal Posterior Distribution")
-```
-
-```{r}
-
+ plot_ly(abc_results, x=~f_value, y=~s_value, type="scatter", mode="markers") %>% layout(plot_bgcolor='#e5ecf6', title="Joint and Marginal Posterior Distribution", xaxis = list(title="ABC thetabias"), yaxis = list(title="ABC thetaone (X4)"))
 ```
