@@ -1,5 +1,0 @@
-"0","plot_ly(df) %>%"
-"0","  add_trace( x=~time, y=~X1,type = ""scatter"",mode = ""lines"", name = ""X1"") %>%  "
-"0","  add_trace( x=~time, y=~X2,type = ""scatter"",mode = ""lines"", name = ""X2"") %>%  "
-"0","  add_trace( x=~time, y=~X3,type = ""scatter"",mode = ""lines"", name = ""X3"") %>%  "
-"0","  add_trace( x=~time, y=~X4,type = ""scatter"",mode = ""lines"", name = ""X4"") %>% layout(plot_bgcolor='#e5ecf6', title=""Time series analyais of X with time"", yaxis = list(title = ""X""), xaxis=list(title = ""Time""))"

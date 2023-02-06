@@ -1,7 +1,0 @@
-"0","gg_X1 = ggplot(df, aes(x = X1)) +    # Draw histogram & density"
-"0","  geom_histogram(aes(y = ..density..), bins=10,fill = ""#195f90"") + "
-"0","  stat_density(geom=""line"") +"
-"0","  geom_rug()"
-"0","ggplotly(gg_X1)  %>% layout(plot_bgcolor='#e5ecf6', title=""Distribution of X1"", xaxis= list(title=""X1 Signal""), yaxis = list(title=""Density""))"
-"2","Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-Please use `after_stat(density)` instead."

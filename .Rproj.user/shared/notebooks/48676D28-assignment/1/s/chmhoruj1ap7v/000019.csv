@@ -1,5 +1,0 @@
-"0","gg_X4 = ggplot(df, aes(x = X4)) +    # Draw histogram & density"
-"0","  geom_histogram(aes(y = ..density..), bins=10,fill = ""#195f90"") + "
-"0","  stat_density(geom=""line"") +"
-"0","  geom_rug()"
-"0","ggplotly(gg_X4)  %>% layout(plot_bgcolor='#e5ecf6', title=""Distribution of X4"", xaxis= list(title=""X4 Signal""), yaxis = list(title=""Density""))"

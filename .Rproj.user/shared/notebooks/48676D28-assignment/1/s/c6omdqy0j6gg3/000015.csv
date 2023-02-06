@@ -1,5 +1,0 @@
-"0","gg_X2 = ggplot(df, aes(x = X2)) +    # Draw histogram & density"
-"0","  geom_histogram(aes(y = ..density..), bins=10,fill = ""#195f90"") + "
-"0","  stat_density(geom=""line"") +"
-"0","  geom_rug()"
-"0","ggplotly(gg_X2)  %>% layout(plot_bgcolor='#e5ecf6', title=""Distribution of X2"", xaxis= list(title=""X2 Signal""), yaxis = list(title=""Density""))"

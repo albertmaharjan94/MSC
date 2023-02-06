@@ -1,2 +1,0 @@
-"0","fig = plot_ly(df, x=~X3, y=~y, type=""scatter"", mode=""markers"") %>% layout(plot_bgcolor='#e5ecf6', title=""Corelation of X3 input to y output"", xaxis = list(title=""X3 input""), yaxis = list(title=""Output Signal Y""))"
-"0","fig"

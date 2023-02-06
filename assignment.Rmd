@@ -17,9 +17,9 @@ library(tidyr)
 ```
 
 ```{r}
-time_file = read.csv("./time_1673241270748.csv", header = F)
-X_file = read.csv("./X_1673241366257.csv", header = F)
-y_file = read.csv("./y_1673241374123.csv", header = F)
+time_file = read.csv("./time_1673241270748.csv", header = F, skip = 1)
+X_file = read.csv("./X_1673241366257.csv", header = F, skip = 1)
+y_file = read.csv("./y_1673241374123.csv", header = F, skip = 1)
 
 ```
 
@@ -78,7 +78,7 @@ y_fig
 
 ```{r}
 gg_X1 = ggplot(df, aes(x = X1)) +    # Draw histogram & density
-  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  geom_histogram(aes(y = after_stat(density) ), bins=10,fill = "#195f90") + 
   stat_density(geom="line") +
   geom_rug()
 ggplotly(gg_X1)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X1", xaxis= list(title="X1 Signal"), yaxis = list(title="Density"))
@@ -87,7 +87,7 @@ ggplotly(gg_X1)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X1", 
 
 ```{r}
 gg_X2 = ggplot(df, aes(x = X2)) +    # Draw histogram & density
-  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  geom_histogram(aes(y = after_stat(density)), bins=10,fill = "#195f90") + 
   stat_density(geom="line") +
   geom_rug()
 ggplotly(gg_X2)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X2", xaxis= list(title="X2 Signal"), yaxis = list(title="Density"))
@@ -96,7 +96,7 @@ ggplotly(gg_X2)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X2", 
 
 ```{r}
 gg_X3 = ggplot(df, aes(x = X3)) +    # Draw histogram & density
-  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
+  geom_histogram(aes(y = after_stat(density)), bins=10,fill = "#195f90") + 
   stat_density(geom="line") +
   geom_rug()
 ggplotly(gg_X3)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X3", xaxis= list(title="X3 Signal"), yaxis = list(title="Density"))
@@ -105,8 +105,8 @@ ggplotly(gg_X3)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X3", 
 
 ```{r}
 gg_X4 = ggplot(df, aes(x = X4)) +    # Draw histogram & density
-  geom_histogram(aes(y = ..density..), bins=10,fill = "#195f90") + 
-  stat_density(geom="line") +
+  geom_histogram(aes(y = after_stat(density)), bins=10,fill = "#195f90") + 
+  stat_density(aes(y = after_stat(density)),geom="line") +
   geom_rug()
 ggplotly(gg_X4)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X4", xaxis= list(title="X4 Signal"), yaxis = list(title="Density"))
 
@@ -114,8 +114,8 @@ ggplotly(gg_X4)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X4", 
 
 ```{r}
 p <- ggplot(X_df, aes(x = values)) +
-  geom_histogram(aes(x=values, y = ..density.., fill=Inputs), bins = 10, alpha=0.5)+
-  stat_density(aes(x=values, y = ..density.., color=Inputs),geom="line") +
+  geom_histogram(aes(x=values, y = after_stat(density), fill=Inputs), bins = 10, alpha=0.5)+
+  stat_density(aes(x=values, y = after_stat(density), color=Inputs),geom="line") +
   geom_rug()
 fig <- ggplotly(p) %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of X inputs", xaxis= list(title="X Signal"), yaxis = list(title="Density"))
 fig
@@ -148,4 +148,345 @@ plot_ly(df) %>%
   add_trace( x=~X2, y=~y,type = "scatter",mode = "markers", name = "X2") %>%  
   add_trace( x=~X3, y=~y, type = "scatter",mode = "markers", name = "X3") %>%  
   add_trace( x=~X4, y=~y,type = "scatter",mode = "markers", name = "X4")  %>% layout(plot_bgcolor='#e5ecf6', title="Corelation of X inputs with y", xaxis = list(title="X inputs"), yaxis = list(title="Y"))
+
+```
+
+```{r}
+ones = matrix(1, length(df$X1),1)
+```
+
+```{r}
+noise  = rnorm(length(df$y), mean=0, sd = 0.1)
+```
+
+```{r}
+thetaHat <- function(model, y){
+  return (solve(t(model) %*% model) %*% t(model) %*% y)
+}
+```
+
+```{r}
+Model1 = cbind(df$X4, df$X1^2, df$X1^3, df$X2^4, df$X1^4, ones, noise)
+Model1_theta_hat =thetaHat(Model1, df$y)
+print("Model1 Theta hat")
+print(Model1_theta_hat[,1])
+print("Model1 Y hat")
+y_Hat_Model1 = Model1 %*% Model1_theta_hat
+print(y_Hat_Model1[1:5,])
+```
+
+```{r}
+Model2 = cbind(df$X4, df$X1^3, df$X3^4, ones, noise)
+Model2_theta_hat = thetaHat(Model2, df$y)
+print("Model2 Theta hat")
+print(Model2_theta_hat[,1])
+y_Hat_Model2 = Model2 %*% Model2_theta_hat
+print("Model2 Y hat")
+print(y_Hat_Model2[1:5,])
+```
+
+```{r}
+Model3 = cbind(df$X3^3, df$X3^4, ones, noise)
+Model3_theta_hat = thetaHat(Model3, df$y)
+print("Model3 Theta hat")
+print(Model3_theta_hat[,1])
+y_Hat_Model3 = Model3 %*% Model3_theta_hat
+print("Model3 Y hat")
+print(y_Hat_Model3[1:5,])
+```
+
+```{r}
+Model4 = cbind(df$X2, df$X1^3, df$X3^4, ones, noise)
+Model4_theta_hat = thetaHat(Model4, df$y)
+print("Model4 Theta hat")
+print(Model4_theta_hat[,1])
+y_Hat_Model4 = Model4 %*% Model4_theta_hat
+print("Model4 Y hat")
+print(y_Hat_Model4[1:5,])
+```
+
+```{r}
+Model5 = cbind(df$X4, df$X1^2, df$X1^3, df$X3^4, ones, noise)
+Model5_theta_hat = thetaHat(Model5, df$y)
+print("Model5 Theta hat")
+print(Model5_theta_hat[,1])
+y_Hat_Model5 = Model5 %*% Model5_theta_hat
+print("Model5 Y hat")
+print(y_Hat_Model5[1:5,])
+```
+
+```{r}
+calculateRSS <- function(y, y_hat_model){
+  return (sum((y-y_hat_model)^2))
+}
+```
+
+```{r}
+RSS_Model1 = calculateRSS(df$y, y_Hat_Model1)
+
+RSS_Model2 = calculateRSS(df$y, y_Hat_Model2)
+
+RSS_Model3 = calculateRSS(df$y, y_Hat_Model3)
+
+RSS_Model4 = calculateRSS(df$y, y_Hat_Model4)
+
+RSS_Model5 = calculateRSS(df$y, y_Hat_Model5)
+
+c(RSS_Model1, RSS_Model2, RSS_Model3, RSS_Model4, RSS_Model5)
+
+```
+
+```{r}
+calculateVariance <- function(N, rss_model){
+  return  (rss_model/(N-1))
+}
+```
+
+```{r}
+calculateLikelihood <- function(N, variance_model, rss_model) {
+  return (-(N/2)*(log(2*pi))-(N/2)*(log(variance_model))-(1/(2*variance_model))*rss_model)
+}
+```
+
+```{r}
+N = length(df$y)
+Variance_Model1 = calculateVariance(N, RSS_Model1)
+
+Variance_Model2 = calculateVariance(N, RSS_Model2)
+
+Variance_Model3 = calculateVariance(N, RSS_Model3)
+
+Variance_Model4 = calculateVariance(N, RSS_Model4)
+
+Variance_Model5 = calculateVariance(N, RSS_Model5)
+```
+
+```{r}
+c(Variance_Model1, Variance_Model2, Variance_Model3, Variance_Model4, Variance_Model5)
+```
+
+```{r}
+Likelihood_1  = calculateLikelihood(N, Variance_Model1, RSS_Model1)
+Likelihood_2  = calculateLikelihood(N, Variance_Model2, RSS_Model2)
+Likelihood_3  = calculateLikelihood(N, Variance_Model3, RSS_Model3)
+Likelihood_4  = calculateLikelihood(N, Variance_Model4, RSS_Model4)
+Likelihood_5  = calculateLikelihood(N, Variance_Model5, RSS_Model5)
+
+c(Likelihood_1, Likelihood_2, Likelihood_3, Likelihood_4, Likelihood_5)
+```
+
+```{r}
+calculateAIC <- function(N, model_thetahat, likelihood_model){
+  k_model = length(model_thetahat)
+  return (2*k_model-2*likelihood_model)
+}
+calculateBIC <- function(N, model_thetahat, likelihood_model){
+  k_model = length(model_thetahat)
+  return (k_model* log(N) - 2*likelihood_model)
+}
+
+```
+
+```{r}
+AIC_Model1 = calculateAIC(N, Model1_theta_hat, Likelihood_1)
+BIC_Model1 = calculateBIC(N, Model1_theta_hat, Likelihood_1)
+c(AIC_Model1, BIC_Model1)
+```
+
+```{r}
+AIC_Model2 = calculateAIC(N, Model2_theta_hat, Likelihood_2)
+BIC_Model2 = calculateBIC(N, Model2_theta_hat, Likelihood_2)
+c(AIC_Model2, BIC_Model2)
+```
+
+```{r}
+AIC_Model3 = calculateAIC(N, Model3_theta_hat, Likelihood_3)
+BIC_Model3 = calculateBIC(N, Model3_theta_hat, Likelihood_3)
+c(AIC_Model3, BIC_Model3)
+```
+
+```{r}
+AIC_Model4 = calculateAIC(N, Model4_theta_hat, Likelihood_4)
+BIC_Model4 = calculateBIC(N, Model4_theta_hat, Likelihood_4)
+c(AIC_Model4, BIC_Model4)
+```
+
+```{r}
+AIC_Model5 = calculateAIC(N, Model5_theta_hat, Likelihood_5)
+BIC_Model5 = calculateBIC(N, Model5_theta_hat, Likelihood_5)
+c(AIC_Model5, BIC_Model5)
+```
+
+```{r}
+calculateError <- function(y, y_hat){
+  return (y-y_hat)
+}
+```
+
+```{r}
+plotQQ <-function(model_error, title){
+  error_fig = ggplot(data.frame(model_error), aes(sample=model_error)) +
+  geom_qq(color = "#195f90" ) +
+  geom_qq_line(color = "red" )
+    
+  return (ggplotly(error_fig)  %>% layout(plot_bgcolor='#e5ecf6', title=title, xaxis= list(title="Theoritical Quantities"), yaxis = list(title="Sample Quantities")))
+}
+
+```
+
+```{r}
+Model1_Error = calculateError(df$y, y_Hat_Model1)
+plotQQ(Model1_Error, "QQ plot of model 1")
+```
+
+```{r}
+Model2_Error = calculateError(df$y, y_Hat_Model2)
+plotQQ(Model2_Error, "QQ plot of model 2")
+```
+
+```{r}
+Model3_Error = calculateError(df$y, y_Hat_Model3)
+plotQQ(Model3_Error, "QQ plot of model 3")
+
+```
+
+```{r}
+Model4_Error = calculateError(df$y, y_Hat_Model4)
+plotQQ(Model4_Error, "QQ plot of model 4")
+
+```
+
+```{r}
+Model5_Error = calculateError(df$y, y_Hat_Model5)
+plotQQ(Model5_Error, "QQ plot of model 5")
+```
+
+```{r}
+Split_Data = initial_split(df, prop = .7)
+training_set = training(Split_Data)
+testing_set = testing(Split_Data)
+```
+
+```{r}
+training_ones=matrix(1 , length(training_set$X1),1)
+noise = rnorm(length(training_set$y), mean=0, sd = 0.1)
+testing_ones=matrix(1 , length(testing_set$X1),1)
+testing_noise = rnorm(length(testing_set$y), mean=0, sd = 0.1)
+
+X_traning_model = cbind(training_set$X4,training_set$X1^3,training_set$X3^4, training_ones, noise)
+X_testing_model = cbind(testing_set$X4,testing_set$X1^3,testing_set$X3^4, testing_ones, testing_noise)
+
+training_thetaHat = thetaHat(X_traning_model, training_set$y)
+```
+
+```{r}
+Y_testing_hat = X_testing_model %*% training_thetaHat
+RSS_testing=sum((testing_set$y-Y_testing_hat)^2)
+RSS_testing
+```
+
+```{r}
+t.test(training_set$y, mu = 500, alternative = "two.sided", conf.level=0.95)
+```
+
+```{r}
+C_I1 = -0.1631672 
+C_I2 = 0.4873683
+```
+
+```{r}
+traingin_plot = ggplot(training_set, aes(x = y)) +    # Draw histogram & density
+  stat_density(geom="line", color = "#195f90") + 
+  geom_vline(xintercept = C_I1, linetype="dashed", color="red")+ 
+  geom_vline(xintercept = C_I2, linetype="dashed", color="red")
+ggplotly(traingin_plot)  %>% layout(plot_bgcolor='#e5ecf6', title="Distribution of training data", xaxis= list(title="y"), yaxis = list(title="Density"))
+```
+
+```{r}
+thetaHatTraining = thetaHat(X_traning_model, training_set$y)
+```
+
+```{r}
+dis_test=density(training_set$y)
+plot(dis_test,main = "Density plot of Y Signal")
+```
+
+```{r}
+z=1.96 ##(95%) Confidential interval
+error=(as.matrix(testing_set$y)- Y_testing_hat)
+```
+
+```{r}
+n_len=length(Y_testing_hat)
+sd_error = sqrt(abs(sum(error^2)/n_len -1))
+sd_error
+
+
+```
+
+```{r}
+C_I_1= z * sqrt( abs((error * (1-error) ) / n_len))
+C_I_1
+```
+
+```{r}
+C_I_2= z*sqrt(abs((error*(1+error)/n_len)))
+C_I_2
+```
+
+```{r}
+Model2_theta_hat[4,]
+Model2_theta_hat
+```
+
+```{r}
+arr_1=0
+arr_2=0
+f_value=0
+s_value=0
+Model2_theta_hat
+#values from thetahat
+thetebias <- Model2_theta_hat[4,] #choosen parameter
+thetaone <- Model2_theta_hat[1,] # chosen prarameter
+thetatwo <- Model2_theta_hat[2,] # constant value
+thetathree <- -Model2_theta_hat[3,] # constant value
+thetanoise <- Model2_theta_hat[5,]
+Epison <- RSS_Model2 * 2 ## fixing value of eplision
+num <- 100 #number of iteration
+```
+
+```{r}
+counter <- 0
+for (i in 1:num) {
+  range1 <- runif(1,-thetebias,thetebias) # calculating the range
+  range1
+  range2 <- runif(1,-thetaone,thetaone)
+  New_thetahat <- matrix(c(range1,range2,thetatwo,thetafour, thetanoise))
+  New_Y_Hat <- Model2 %*% New_thetahat ## New Y hat
+  new_RSS <- sum((df$y-New_Y_Hat)^2)
+  new_RSS
+  if (new_RSS > Epison){
+    arr_1[i] <- range1
+    arr_2[i] <- range2
+    counter = counter+1
+    f_value <- matrix(arr_1)
+    s_value <- matrix(arr_2)
+  }
+}
+```
+
+```{r}
+hist(f_value)
+```
+
+```{r}
+hist(s_value)
+```
+
+```{r}
+plot(f_value,s_value, col = c("red", "blue"), main = "Joint and Marginal Posterior Distribution")
+```
+
+```{r}
+
 ```

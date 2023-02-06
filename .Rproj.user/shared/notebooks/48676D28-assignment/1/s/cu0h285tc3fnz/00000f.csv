@@ -1,6 +1,0 @@
-"0",""
-"0","library(plotly)"
-"0",""
-"0","stock = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')"
-"0",""
-"0","stock"

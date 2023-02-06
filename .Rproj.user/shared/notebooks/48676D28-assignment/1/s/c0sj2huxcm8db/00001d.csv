@@ -1,5 +1,0 @@
-"0",""
-"0","fig1 = plot_ly(df, x=~time, y=~y,type = ""scatter"",mode = ""lines"", name = ""y"")"
-"0",""
-"0","y_fig = plotly:: subplot(fig1, nrows = 1,titleX =TRUE, titleY = TRUE )  %>% layout(plot_bgcolor='#e5ecf6', title=""Time series analysis of Y with time"", xaxis = list(title=""Time""), yaxis = list(title=""Output Signal Y""))"
-"0","y_fig"
